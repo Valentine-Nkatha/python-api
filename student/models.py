@@ -10,8 +10,8 @@ class Students(models.Model):
     country= models.CharField(max_length=20)
     phone_number=models.CharField(max_length=20)
     date_of_birth= models.DateField()
-    immediate_contact = models.DateField(max_length=20)
-    bio = models.TimeField()
+    immediate_contact = models.CharField(max_length=20)
+    bio = models.CharField(max_length=20)
 
     objects = models.Manager()
 
