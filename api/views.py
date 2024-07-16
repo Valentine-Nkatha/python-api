@@ -21,8 +21,8 @@ class StudentListView(APIView):
       
 class ClassPeriodListView(APIView):
       def get(self, request):
-          periods = ClassPeriod.objects.all()
-          serializer=ClassPeriodSerializer(periods, many=True)
+          classperiods = ClassPeriod.objects.all()
+          serializer=ClassPeriodSerializer(classperiods, many=True)
           return Response(serializer.data)
 
 class CourseListView(APIView):

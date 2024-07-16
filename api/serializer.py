@@ -8,7 +8,7 @@ from teacher.models import Teacher
 class StudentSerializer (serializers. ModelSerializer):
     class Meta:
                 model=Students
-                fields =" __all__"
+                fields = '__all__'
 class ClassPeriodSerializer(serializers.ModelSerializer):
         class Meta:
                 model = ClassPeriod
