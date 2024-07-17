@@ -13,5 +13,7 @@ class Class(models.Model):
     electricity = models.CharField(max_length=20)
     class_attendance=models.PositiveSmallIntegerField
 
+    objects = models.Manager()
+
     def __str__(self) -> str:
         return f"{self.class_name} {self.class_lecturer}"

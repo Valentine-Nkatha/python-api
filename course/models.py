@@ -1,4 +1,5 @@
 from django.db import models
+from student.models import Students
 
 # Create your models here.
 class Course(models.Model):
@@ -12,6 +13,7 @@ class Course(models.Model):
     syllabus= models.PositiveIntegerField
     exams = models.CharField(max_length=20)
     duration=models.CharField(max_length=20)
+    # students = models.ManyToManyField(Students, related_name="courses")
 
     objects = models.Manager()
     

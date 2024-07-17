@@ -10,6 +10,8 @@ from course.models import Course
 from .serializer import CourseSerializer
 from  .serializer import TeacherSerializer
 from teacher.models import Teacher
+from classroom.models import Class
+from .serializer import ClassSerializer
 
 
 # Create your views here.
@@ -34,4 +36,9 @@ class TeacherListView(APIView):
       def get(self, request):
             teachers = Teacher.objects.all()
             serializer = TeacherSerializer(teachers, many=True)
+            return Response(serializer.data)
+class ClassListView(APIView):
+      def get(self, request):
+            classes = Class.objects.all()
+            serializer = TeacherSerializer(classes, many=True)
             return Response(serializer.data)

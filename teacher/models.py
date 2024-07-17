@@ -4,7 +4,7 @@ from django.db import models
 class Teacher(models.Model):
     teachers_name =  models.CharField(max_length=20)
     teachers_age= models.PositiveSmallIntegerField
-    teachers_id =models.PositiveSmallIntegerField()
+    teachers_national_id =models.AutoField(primary_key=True)
     teachers_course=models.CharField(max_length=20)
     teachers_class= models.CharField(max_length=20)
     teachers_description= models.TextField()
