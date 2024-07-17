@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('start_time', models.TimeField()),
                 ('end_time', models.TimeField()),
                 ('course', models.CharField(max_length=20)),
-                ('classroom', models.CharField(max_length=20)),
+                ('classroom_period', models.CharField(max_length=20)),
                 ('day_of_week', models.CharField(max_length=20)),
             ],
         ),

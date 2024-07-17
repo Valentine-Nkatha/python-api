@@ -10,7 +10,7 @@ class Teacher(models.Model):
     teachers_description= models.TextField()
     teachers_occupation=models.CharField(max_length=20)
     teachers_salary= models.PositiveIntegerField
-    teaachers_hobby = models.CharField(max_length=20)
+    teaachers_hobby = models.CharField(max_length=20,default="teaching")
     teachers_gender=models.CharField(max_length=20)
     
     objects = models.Manager()

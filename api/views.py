@@ -40,5 +40,5 @@ class TeacherListView(APIView):
 class ClassListView(APIView):
       def get(self, request):
             classes = Class.objects.all()
-            serializer = TeacherSerializer(classes, many=True)
+            serializer = ClassSerializer(classes, many=True)
             return Response(serializer.data)
