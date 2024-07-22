@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('classperiod', '0005_remove_classperiod_teacher'),
-        ('teacher', '0003_remove_teacher_id_and_more'),
+        # ('teacher', '0003_remove_teacher_id_and_more'),
     ]
 
     operations = [

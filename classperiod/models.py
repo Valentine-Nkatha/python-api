@@ -1,6 +1,6 @@
 from django.db import models
 
-from teacher.models import Teacher
+from teachers.models import Teacher
 
 # Create your models here.
 class ClassPeriod(models.Model):
@@ -10,8 +10,8 @@ class ClassPeriod(models.Model):
     course = models.CharField(max_length=20, default="Python")
     period = models.CharField(max_length=20, default="one year")
     day_of_week = models.CharField(max_length=20)
-    # teachers_period = models.ForeignKey(Teacher, on_delete=models.CASCADE,related_name="teachers")
-    teacherss = models.ManyToManyField(Teacher)
+    teachers_period = models.ForeignKey(Teacher, on_delete=models.CASCADE,related_name="teachers")
+    # teacherss = models.ManyToManyField(Teacher)
 
     objects = models.Manager()
 

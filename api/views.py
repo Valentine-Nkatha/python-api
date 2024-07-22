@@ -9,8 +9,8 @@ from rest_framework import serializers
 from course.models import Course
 from .serializer import CourseSerializer
 from  .serializer import TeacherSerializer
-from teacher.models import Teacher
-from classroom.models import Class
+from teachers.models import Teacher
+from classes.models import Class
 from .serializer import ClassSerializer
 from rest_framework import status
 
