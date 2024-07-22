@@ -7,7 +7,7 @@ class Students(models.Model):
     code =models.PositiveSmallIntegerField()
     email=models.EmailField()
     age= models.PositiveIntegerField()
-    country= models.CharField(max_length=20)
+    country= models.CharField(max_length=20, default="Kenya")
     phone_number=models.CharField(max_length=20)
     date_of_birth= models.DateField()
     immediate_contact = models.CharField(max_length=20)

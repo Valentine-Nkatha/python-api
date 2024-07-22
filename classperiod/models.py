@@ -4,13 +4,14 @@ from teacher.models import Teacher
 
 # Create your models here.
 class ClassPeriod(models.Model):
-    class_id = models.AutoField(primary_key=True)
     start_time = models.TimeField()
+    class_perod_id = models.AutoField(primary_key=True)
     end_time = models.TimeField()
-    course = models.CharField(max_length=20)
-    classroom_period = models.CharField(max_length=20, default="classes")
+    course = models.CharField(max_length=20, default="Python")
+    period = models.CharField(max_length=20, default="one year")
     day_of_week = models.CharField(max_length=20)
-    teachers_period = models.ForeignKey(Teacher, on_delete=models.CASCADE,related_name="teachers")
+    # teachers_period = models.ForeignKey(Teacher, on_delete=models.CASCADE,related_name="teachers")
+    teacherss = models.ManyToManyField(Teacher)
 
     objects = models.Manager()
 

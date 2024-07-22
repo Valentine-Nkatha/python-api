@@ -13,7 +13,7 @@ class Course(models.Model):
     syllabus= models.PositiveIntegerField
     exams = models.CharField(max_length=20)
     duration=models.CharField(max_length=20)
-    # students = models.ManyToManyField(Students, related_name="courses")
+    students_course = models.ManyToManyField(Students)
 
     objects = models.Manager()
     

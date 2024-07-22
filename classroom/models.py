@@ -5,12 +5,12 @@ class Class(models.Model):
     class_time =  models.DateTimeField
     class_capacity= models.PositiveSmallIntegerField
     class_name =models.CharField(max_length=20)
-    class_lecturer=models.CharField(max_length=20)
+    class_lecturer=models.CharField(max_length=20, default="John")
     class_id= models.PositiveSmallIntegerField
-    class_name= models.CharField(max_length=20)
-    class_rep=models.CharField(max_length=20)
+    class_name= models.CharField(max_length=20, default="Adalab")
+    class_rep=models.CharField(max_length=20, default="Nancy")
     class_description= models.TextField
-    electricity = models.CharField(max_length=20)
+    class_performance = models.FloatField(default=0)
     class_attendance=models.PositiveSmallIntegerField
 
     objects = models.Manager()
