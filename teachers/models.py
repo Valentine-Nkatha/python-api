@@ -1,5 +1,6 @@
 from django.db import models
-
+from course.models import Course
+from teachers.models import Class
 # Create your models here.
 class Teacher(models.Model):
     teachers_name =  models.CharField(max_length=20)
@@ -12,6 +13,8 @@ class Teacher(models.Model):
     teachers_salary= models.PositiveIntegerField()
     teaachers_hobby = models.CharField(max_length=20,default="Teaching")
     teachers_gender=models.CharField(max_length=20)
+    teachers_course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    teachers_class = models.ForeignKey(Class, on_delete=models.CASCADE)
     
     objects = models.Manager()
     

@@ -16,9 +16,16 @@ from rest_framework import status
 
 
 # Create your views here.
-class StudentListView(APIView):
+class StudentListView(APIView):#without an id
       def get(self, request):
             students = Students.objects.all()
+            first_name=request.query_params.get("first_name")
+            country = request.query_params.get("country")
+            if first_name:
+                  students = students.filter(first_name=first_name)
+            
+            if country:
+                  students = students.filter(country=country)
             serializer=StudentSerializer(students, many=True)
             return Response(serializer.data)
       
@@ -29,7 +36,30 @@ class StudentListView(APIView):
                   return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
                   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-class StudentDetailView(APIView):
+class StudentDetailView(APIView):#with an id
+      def enroll_student(self, student, course_id):
+            course = Course.objects.get(id=course_id)
+            student.course.add(course)
+      def post(self,request, id):
+            student = Students.objects.get(id=id)
+            action = request.data.get("action")
+            if action == "enroll":
+              course_id = request.data.get("course")
+              self.enroll_student(student,course_id)
+              return Response(status.HTTP_201_CREATED)
+            
+      def add_student(self, student, classroom_id):
+            classroom = Class.objects.get(id=classroom_id)
+            student.classroom.add(classroom)
+      # def post(self,request, id):
+      #       students = Students.objects.get(id=id)
+      #       action = request.data.get("action")
+      #       if action == "add":
+      #         classes_id = request.data.get("classroom")
+      #         self.add_student(students,classes_id)
+      #         return Response(status.HTTP_201_CREATED)
+      
+
       def get(self,request,id):
             student = Students.objects.get(id=id)
             serializer = StudentSerializer(student)
