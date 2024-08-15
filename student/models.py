@@ -1,6 +1,6 @@
 from django.db import models
 from course.models import Course
-from student.models import Class
+from classes.models import Class
 # Cretate your models here.
 class Students(models.Model):
     first_name =  models.CharField(max_length=20)
@@ -12,9 +12,9 @@ class Students(models.Model):
     phone_number=models.CharField(max_length=20)
     date_of_birth= models.DateField()
     immediate_contact = models.CharField(max_length=20)
-    bio = models.CharField(max_length=20)
+    bio = models.CharField(max_length=20, default="student")
     courses = models.ManyToManyField(Course)
-    classess = models.ForeignKey(Class, on_delete=models.CASCADE)
+    classes = models.ForeignKey(Class, on_delete=models.CASCADE)
 
     objects = models.Manager()
 

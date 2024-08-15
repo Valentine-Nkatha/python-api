@@ -42,22 +42,23 @@ class StudentDetailView(APIView):#with an id
             student.course.add(course)
       def post(self,request, id):
             student = Students.objects.get(id=id)
+
             action = request.data.get("action")
             if action == "enroll":
               course_id = request.data.get("course")
               self.enroll_student(student,course_id)
               return Response(status.HTTP_201_CREATED)
             
-      def add_student(self, student, classroom_id):
-            classroom = Class.objects.get(id=classroom_id)
-            student.classroom.add(classroom)
-      # def post(self,request, id):
-      #       students = Students.objects.get(id=id)
-      #       action = request.data.get("action")
-      #       if action == "add":
-      #         classes_id = request.data.get("classroom")
-      #         self.add_student(students,classes_id)
-      #         return Response(status.HTTP_201_CREATED)
+      def add_student(self, students, classes_id):
+            classroom = Class.objects.get(id=classes_id)
+            students.classroom.add(classroom)
+      def getpost(self,request, id):
+             students = Students.objects.get(id=id)
+             actions = request.data.get("actions")
+             if actions == "add":
+               classes_id = request.data.get("classroom")
+               self.add_student(students,classes_id)
+               return Response(status.HTTP_201_CREATED)
       
 
       def get(self,request,id):
@@ -155,6 +156,7 @@ class TeacherListView(APIView):
                   return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
                   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
 class TeacherDetailView(APIView):
       def get(self,request,id):
             teacher = Teacher.objects.get(id=id)
@@ -168,6 +170,29 @@ class TeacherDetailView(APIView):
                return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
                   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+      def enroll_teacher(self, teacher, course_id):
+            course = Course.objects.get(id=course_id)
+            teacher.course.add(course)
+      def post(self,request, id):
+            teacher = Teacher.objects.get(id=id)
+
+            action = request.data.get("action")
+            if action == "enroll":
+              course_id = request.data.get("course")
+              self.enroll_teacher(teacher,course_id)
+              return Response(status.HTTP_201_CREATED)
+      def enroll_class(self, teachers, course_id):
+            course = Course.objects.get(id=course_id)
+            teachers.course.add(course)
+      def getpost(self,request, id):
+            teachers = Teacher.objects.get(id=id)
+
+            action = request.data.get("action")
+            if action == "enroll":
+              classes_id = request.data.get("course")
+              self.enroll_teacher(teachers,classes_id)
+              return Response(status.HTTP_201_CREATED)
       def delete(self,request,id):
             teacher =Course.objects.get(id=id)
             teacher.delete()

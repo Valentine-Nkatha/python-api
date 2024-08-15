@@ -1,6 +1,6 @@
 from django.db import models
 from course.models import Course
-from teachers.models import Class
+from classes.models import Class
 # Create your models here.
 class Teacher(models.Model):
     teachers_name =  models.CharField(max_length=20)
