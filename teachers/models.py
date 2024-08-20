@@ -13,8 +13,8 @@ class Teacher(models.Model):
     teachers_salary= models.PositiveIntegerField()
     teaachers_hobby = models.CharField(max_length=20,default="Teaching")
     teachers_gender=models.CharField(max_length=20)
-    teachers_course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    teachers_class = models.ForeignKey(Class, on_delete=models.CASCADE)
+    teachers_course = models.ManyToManyField(Course)
+    teachers_class = models.ManyToManyField(Class)
     
     objects = models.Manager()
     

@@ -13,20 +13,25 @@ from teachers.models import Teacher
 from classes.models import Class
 from .serializer import ClassSerializer
 from rest_framework import status
+from .serializer import minimalStudentSerializer
 
 
 # Create your views here.
 class StudentListView(APIView):#without an id
-      def get(self, request):
-            students = Students.objects.all()
-            first_name=request.query_params.get("first_name")
-            country = request.query_params.get("country")
-            if first_name:
-                  students = students.filter(first_name=first_name)
+      # def get(self, request):
+      #       students = Students.objects.all()
+      #       first_name=request.query_params.get("first_name")
+      #       country = request.query_params.get("country")
+      #       if first_name:
+      #             students = students.filter(first_name=first_name)
             
-            if country:
-                  students = students.filter(country=country)
-            serializer=StudentSerializer(students, many=True)
+      #       if country:
+      #             students = students.filter(country=country)
+      #       serializer=StudentSerializer(students, many=True)
+      #       return Response(serializer.data)
+      def get(self,request):
+            students = Students.objects.all()
+            serializer = minimalStudentSerializer(students, many=True)
             return Response(serializer.data)
       
       def post(self, request):
@@ -40,25 +45,23 @@ class StudentDetailView(APIView):#with an id
       def enroll_student(self, student, course_id):
             course = Course.objects.get(id=course_id)
             student.course.add(course)
+      def add_student(self, students, classes_id):
+            classroom = Class.objects.get(id=classes_id)
+            students.classroom.add(classroom)
       def post(self,request, id):
             student = Students.objects.get(id=id)
-
             action = request.data.get("action")
+
             if action == "enroll":
               course_id = request.data.get("course")
               self.enroll_student(student,course_id)
               return Response(status.HTTP_201_CREATED)
             
-      def add_student(self, students, classes_id):
-            classroom = Class.objects.get(id=classes_id)
-            students.classroom.add(classroom)
-      def getpost(self,request, id):
-             students = Students.objects.get(id=id)
-             actions = request.data.get("actions")
-             if actions == "add":
+            if action == "add":
                classes_id = request.data.get("classroom")
-               self.add_student(students,classes_id)
+               self.add_student(student,classes_id)
                return Response(status.HTTP_201_CREATED)
+            
       
 
       def get(self,request,id):
@@ -174,6 +177,10 @@ class TeacherDetailView(APIView):
       def enroll_teacher(self, teacher, course_id):
             course = Course.objects.get(id=course_id)
             teacher.course.add(course)
+      def enroll_class(self, teachers, course_id):
+            classss = Class.objects.get(id=course_id)
+            teachers.course.add(classss)
+
       def post(self,request, id):
             teacher = Teacher.objects.get(id=id)
 
@@ -182,16 +189,11 @@ class TeacherDetailView(APIView):
               course_id = request.data.get("course")
               self.enroll_teacher(teacher,course_id)
               return Response(status.HTTP_201_CREATED)
-      def enroll_class(self, teachers, course_id):
-            course = Course.objects.get(id=course_id)
-            teachers.course.add(course)
-      def getpost(self,request, id):
-            teachers = Teacher.objects.get(id=id)
-
+      
             action = request.data.get("action")
             if action == "enroll":
               classes_id = request.data.get("course")
-              self.enroll_teacher(teachers,classes_id)
+              self.enroll_teacher(teacher,classes_id)
               return Response(status.HTTP_201_CREATED)
       def delete(self,request,id):
             teacher =Course.objects.get(id=id)
