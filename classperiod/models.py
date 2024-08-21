@@ -12,7 +12,7 @@ class ClassPeriod(models.Model):
     day_of_week = models.CharField(max_length=20, default="Monday")
     # teachers = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     class_perod_id = models.ForeignKey(Class, on_delete=models.CASCADE,default=0)
-    courses = models.ManyToManyField(Course)
+    courses = models.ManyToManyField(Course)|
     teacher = models .ManyToManyField(Teacher)
 
     objects = models.Manager()
